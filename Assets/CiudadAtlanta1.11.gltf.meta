@@ -1,0 +1,358 @@
+fileFormatVersion: 2
+guid: 6e56a0a7d4aa4de4483c05dfe019ce0a
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 715df9372183c47e389bb6e19fbc3b52, type: 3}
+  editorImportSettings:
+    generateSecondaryUVSet: 0
+  importSettings:
+    nodeNameMethod: 1
+    animationMethod: 2
+    generateMipMaps: 1
+    texturesReadable: 0
+    defaultMinFilterMode: 9729
+    defaultMagFilterMode: 9729
+    anisotropicFilterLevel: 1
+  instantiationSettings:
+    mask: -1
+    layer: 0
+    skinUpdateWhenOffscreen: 1
+    lightIntensityFactor: 1
+    sceneObjectCreation: 2
+  assetDependencies:
+  - type: 0
+    originalUri: Assets\CiudadAtlanta1.11.bin
+    assetPath: Assets\CiudadAtlanta1.11.bin
+  - type: 1
+    originalUri: Assets\texture-trees.png
+    assetPath: Assets\texture-trees.png
+  - type: 1
+    originalUri: Assets\material_detail material_Normal.png
+    assetPath: Assets\material_detail material_Normal.png
+  - type: 1
+    originalUri: Assets\material_detail material_BaseColor.png
+    assetPath: Assets\material_detail material_BaseColor.png
+  - type: 1
+    originalUri: Assets\material_detail material_Metallic-material_detail material_Roug.png
+    assetPath: Assets\material_detail material_Metallic-material_detail material_Roug.png
+  - type: 1
+    originalUri: Assets\material_DefaultMaterial_Normal.png
+    assetPath: Assets\material_DefaultMaterial_Normal.png
+  - type: 1
+    originalUri: Assets\material_DefaultMaterial_BaseColor.png
+    assetPath: Assets\material_DefaultMaterial_BaseColor.png
+  - type: 1
+    originalUri: Assets\material_DefaultMaterial_Metallic-material_DefaultMaterial_Roug.png
+    assetPath: Assets\material_DefaultMaterial_Metallic-material_DefaultMaterial_Roug.png
+  - type: 1
+    originalUri: Assets\material_detail material_Metallic.png
+    assetPath: Assets\material_detail material_Metallic.png
+  - type: 1
+    originalUri: Assets\house3_color.png
+    assetPath: Assets\house3_color.png
+  - type: 1
+    originalUri: Assets\house6_normal.png
+    assetPath: Assets\house6_normal.png
+  - type: 1
+    originalUri: Assets\house6_color.png
+    assetPath: Assets\house6_color.png
+  - type: 1
+    originalUri: Assets\house7_normal.png
+    assetPath: Assets\house7_normal.png
+  - type: 1
+    originalUri: Assets\house7_color.png
+    assetPath: Assets\house7_color.png
+  - type: 1
+    originalUri: Assets\Image_0.jpg
+    assetPath: Assets\Image_0.jpg
+  - type: 1
+    originalUri: Assets\Image_1.jpg
+    assetPath: Assets\Image_1.jpg
+  - type: 1
+    originalUri: Assets\Image_2.jpg
+    assetPath: Assets\Image_2.jpg
+  - type: 1
+    originalUri: Assets\Image_3.png
+    assetPath: Assets\Image_3.png
+  - type: 1
+    originalUri: Assets\Image_4.jpg
+    assetPath: Assets\Image_4.jpg
+  - type: 1
+    originalUri: Assets\Image_5.jpg
+    assetPath: Assets\Image_5.jpg
+  - type: 1
+    originalUri: Assets\Image_6.jpg
+    assetPath: Assets\Image_6.jpg
+  - type: 1
+    originalUri: Assets\Image_7.jpg
+    assetPath: Assets\Image_7.jpg
+  - type: 1
+    originalUri: Assets\Image_9.png
+    assetPath: Assets\Image_9.png
+  - type: 1
+    originalUri: Assets\Image_8.jpg
+    assetPath: Assets\Image_8.jpg
+  - type: 1
+    originalUri: Assets\Image_10.jpg
+    assetPath: Assets\Image_10.jpg
+  - type: 1
+    originalUri: Assets\Image_11.jpg
+    assetPath: Assets\Image_11.jpg
+  - type: 1
+    originalUri: Assets\Image_12.jpg
+    assetPath: Assets\Image_12.jpg
+  - type: 1
+    originalUri: Assets\Image_13.jpg
+    assetPath: Assets\Image_13.jpg
+  - type: 1
+    originalUri: Assets\Image_14.jpg
+    assetPath: Assets\Image_14.jpg
+  - type: 1
+    originalUri: Assets\Image_15.jpg
+    assetPath: Assets\Image_15.jpg
+  - type: 1
+    originalUri: Assets\Image_16.jpg
+    assetPath: Assets\Image_16.jpg
+  - type: 1
+    originalUri: Assets\Image_17.jpg
+    assetPath: Assets\Image_17.jpg
+  - type: 1
+    originalUri: Assets\Image_18.jpg
+    assetPath: Assets\Image_18.jpg
+  - type: 1
+    originalUri: Assets\Image_19.jpg
+    assetPath: Assets\Image_19.jpg
+  - type: 1
+    originalUri: Assets\Image_20.jpg
+    assetPath: Assets\Image_20.jpg
+  - type: 1
+    originalUri: Assets\Image_21.jpg
+    assetPath: Assets\Image_21.jpg
+  - type: 1
+    originalUri: Assets\Image_22.jpg
+    assetPath: Assets\Image_22.jpg
+  - type: 1
+    originalUri: Assets\Image_23.jpg
+    assetPath: Assets\Image_23.jpg
+  - type: 1
+    originalUri: Assets\Image_3-2.png
+    assetPath: Assets\Image_3-2.png
+  - type: 1
+    originalUri: Assets\Image_4.png
+    assetPath: Assets\Image_4.png
+  - type: 1
+    originalUri: Assets\Image_2.png
+    assetPath: Assets\Image_2.png
+  - type: 1
+    originalUri: Assets\Image_0.png
+    assetPath: Assets\Image_0.png
+  - type: 1
+    originalUri: Assets\Image_1.png
+    assetPath: Assets\Image_1.png
+  - type: 1
+    originalUri: Assets\Image_0-2.png
+    assetPath: Assets\Image_0-2.png
+  - type: 1
+    originalUri: Assets\Picnic_Table_normal.png
+    assetPath: Assets\Picnic_Table_normal.png
+  - type: 1
+    originalUri: Assets\Picnic_Table_metallicRoughness.png
+    assetPath: Assets\Picnic_Table_metallicRoughness.png
+  - type: 1
+    originalUri: Assets\Picnic_Table_baseColor.png
+    assetPath: Assets\Picnic_Table_baseColor.png
+  - type: 1
+    originalUri: Assets\1010_normal.png
+    assetPath: Assets\1010_normal.png
+  - type: 1
+    originalUri: Assets\1010_metallicRoughness.png
+    assetPath: Assets\1010_metallicRoughness.png
+  - type: 1
+    originalUri: Assets\1010_baseColor.png
+    assetPath: Assets\1010_baseColor.png
+  - type: 1
+    originalUri: Assets\Normal map 4k.png
+    assetPath: Assets\Normal map 4k.png
+  - type: 1
+    originalUri: Assets\Colour 4k.png
+    assetPath: Assets\Colour 4k.png
+  - type: 1
+    originalUri: Assets\Roughness 4k Inverted-Roughness 4k.png
+    assetPath: Assets\Roughness 4k Inverted-Roughness 4k.png
+  - type: 1
+    originalUri: Assets\Image_0-4.jpg
+    assetPath: Assets\Image_0-4.jpg
+  - type: 1
+    originalUri: Assets\house_01_mat_baseColor.jpg
+    assetPath: Assets\house_01_mat_baseColor.jpg
+  - type: 1
+    originalUri: Assets\house_02_mat_baseColor.jpg
+    assetPath: Assets\house_02_mat_baseColor.jpg
+  - type: 1
+    originalUri: Assets\house_05_mat_baseColor.jpg
+    assetPath: Assets\house_05_mat_baseColor.jpg
+  - type: 1
+    originalUri: Assets\house_08_mat_baseColor.jpg
+    assetPath: Assets\house_08_mat_baseColor.jpg
+  - type: 1
+    originalUri: Assets\house_09_mat_baseColor.jpg
+    assetPath: Assets\house_09_mat_baseColor.jpg
+  - type: 1
+    originalUri: Assets\Image_2-2.jpg
+    assetPath: Assets\Image_2-2.jpg
+  - type: 1
+    originalUri: Assets\Image_1-3.jpg
+    assetPath: Assets\Image_1-3.jpg
+  - type: 1
+    originalUri: Assets\Image_0-5.jpg
+    assetPath: Assets\Image_0-5.jpg
+  - type: 1
+    originalUri: Assets\Image_2-2.png
+    assetPath: Assets\Image_2-2.png
+  - type: 1
+    originalUri: Assets\Image_0-14.png
+    assetPath: Assets\Image_0-14.png
+  - type: 1
+    originalUri: Assets\Image_1-2.png
+    assetPath: Assets\Image_1-2.png
+  - type: 1
+    originalUri: Assets\Image_3-Image_4.png
+    assetPath: Assets\Image_3-Image_4.png
+  - type: 1
+    originalUri: Assets\Image_2-3.png
+    assetPath: Assets\Image_2-3.png
+  - type: 1
+    originalUri: Assets\Image_1-3.png
+    assetPath: Assets\Image_1-3.png
+  - type: 1
+    originalUri: Assets\Image_0-15.png
+    assetPath: Assets\Image_0-15.png
+  - type: 1
+    originalUri: Assets\7403010.jpg
+    assetPath: Assets\7403010.jpg
+  - type: 1
+    originalUri: Assets\T_IY_sign_round_01_BaseColor.png
+    assetPath: Assets\T_IY_sign_round_01_BaseColor.png
+  - type: 1
+    originalUri: Assets\T_IY_sign_round_01_OcclusionRoughnessMetallic.png
+    assetPath: Assets\T_IY_sign_round_01_OcclusionRoughnessMetallic.png
+  - type: 1
+    originalUri: Assets\house_03_mat_baseColor.jpg
+    assetPath: Assets\house_03_mat_baseColor.jpg
+  - type: 1
+    originalUri: Assets\house_06_mat_baseColor.jpg
+    assetPath: Assets\house_06_mat_baseColor.jpg
+  - type: 1
+    originalUri: Assets\Image_2-13.png
+    assetPath: Assets\Image_2-13.png
+  - type: 1
+    originalUri: Assets\Image_0-32.png
+    assetPath: Assets\Image_0-32.png
+  - type: 1
+    originalUri: Assets\Image_1-13.png
+    assetPath: Assets\Image_1-13.png
+  - type: 1
+    originalUri: Assets\Image_5.png
+    assetPath: Assets\Image_5.png
+  - type: 1
+    originalUri: Assets\Image_3-8.png
+    assetPath: Assets\Image_3-8.png
+  - type: 1
+    originalUri: Assets\Image_4-6.png
+    assetPath: Assets\Image_4-6.png
+  - type: 1
+    originalUri: Assets\Image_11.png
+    assetPath: Assets\Image_11.png
+  - type: 1
+    originalUri: Assets\Image_9-2.png
+    assetPath: Assets\Image_9-2.png
+  - type: 1
+    originalUri: Assets\Image_10.png
+    assetPath: Assets\Image_10.png
+  - type: 1
+    originalUri: Assets\Image_8.png
+    assetPath: Assets\Image_8.png
+  - type: 1
+    originalUri: Assets\Image_6.png
+    assetPath: Assets\Image_6.png
+  - type: 1
+    originalUri: Assets\Image_7.png
+    assetPath: Assets\Image_7.png
+  - type: 1
+    originalUri: Assets\Image_17.png
+    assetPath: Assets\Image_17.png
+  - type: 1
+    originalUri: Assets\Image_15.png
+    assetPath: Assets\Image_15.png
+  - type: 1
+    originalUri: Assets\Image_16.png
+    assetPath: Assets\Image_16.png
+  - type: 1
+    originalUri: Assets\Image_2-16.png
+    assetPath: Assets\Image_2-16.png
+  - type: 1
+    originalUri: Assets\Image_0-35.png
+    assetPath: Assets\Image_0-35.png
+  - type: 1
+    originalUri: Assets\Image_1-16.png
+    assetPath: Assets\Image_1-16.png
+  - type: 1
+    originalUri: Assets\Image_14.png
+    assetPath: Assets\Image_14.png
+  - type: 1
+    originalUri: Assets\Image_12.png
+    assetPath: Assets\Image_12.png
+  - type: 1
+    originalUri: Assets\Image_13.png
+    assetPath: Assets\Image_13.png
+  - type: 1
+    originalUri: Assets\Image_2-3.jpg
+    assetPath: Assets\Image_2-3.jpg
+  - type: 1
+    originalUri: Assets\Image_3-40.png
+    assetPath: Assets\Image_3-40.png
+  - type: 1
+    originalUri: Assets\Image_1-4.jpg
+    assetPath: Assets\Image_1-4.jpg
+  - type: 1
+    originalUri: Assets\Image_0-7.jpg
+    assetPath: Assets\Image_0-7.jpg
+  - type: 1
+    originalUri: Assets\Texture_1.png
+    assetPath: Assets\Texture_1.png
+  - type: 1
+    originalUri: Assets\BerryBushBlack texture.png
+    assetPath: Assets\BerryBushBlack texture.png
+  - type: 1
+    originalUri: Assets\BerryBushBlue texture.png
+    assetPath: Assets\BerryBushBlue texture.png
+  - type: 1
+    originalUri: Assets\BerryBushRed texture.png
+    assetPath: Assets\BerryBushRed texture.png
+  - type: 1
+    originalUri: Assets\BerryBushYellow texture.png
+    assetPath: Assets\BerryBushYellow texture.png
+  reportItems:
+  - type: 2
+    code: 20
+    messages:
+    - KHR_materials_emissive_strength
+  - type: 2
+    code: 20
+    messages:
+    - KHR_materials_specular
+  - type: 2
+    code: 20
+    messages:
+    - KHR_materials_ior
+  - type: 2
+    code: 30
+    messages: []
+  - type: 2
+    code: 30
+    messages: []
