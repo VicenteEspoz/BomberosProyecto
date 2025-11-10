@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\TESIS\\Proyectos\\Unity\\bombero\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{37D89AA0-ECFE-9FA7-D811-18A45DD22BBD}|Assembly-CSharp.csproj|d:\\tesis\\proyectos\\unity\\bombero\\assets\\vh.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{37D89AA0-ECFE-9FA7-D811-18A45DD22BBD}|Assembly-CSharp.csproj|solutionrelative:assets\\vh.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "vh.cs",
+              "DocumentMoniker": "D:\\TESIS\\Proyectos\\Unity\\bombero\\Assets\\vh.cs",
+              "RelativeDocumentMoniker": "Assets\\vh.cs",
+              "ToolTip": "D:\\TESIS\\Proyectos\\Unity\\bombero\\Assets\\vh.cs",
+              "RelativeToolTip": "Assets\\vh.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-10T02:39:06.507Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
