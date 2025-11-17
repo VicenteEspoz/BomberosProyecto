@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: f17ff7621a66eea4cb47284fbfe37961
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - radioSource: {instanceID: 0}
+  - clickSource: {instanceID: 0}
+  - clickOn: {fileID: 8300000, guid: 0f086810f9aa23e42aa8608b4b2fa38e, type: 3}
+  - clickOff: {fileID: 8300000, guid: 82e903675ece9d942a193353a8d6b4ed, type: 3}
+  - mixer: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
