@@ -30,7 +30,7 @@ public class SocketManager : MonoBehaviour
         // ... (Tu lógica de Start existente) ...
         
         // 1. Configuración de la conexión
-        var uri = new System.Uri("http://localhost:3000"); 
+        var uri = new System.Uri("http://pacheco.chillan.ubiobio.cl:8020/"); 
         socket = new SocketIOUnity(uri);
 
         // Evento de conexión
