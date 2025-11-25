@@ -11,6 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/casa.unity
     guid: a969037c929812046b7e516351c91eca
+  - enabled: 1
+    path: Assets/Scenes/choque.unity
+    guid: 89d54fdb9f3a3d74bb4ac009b58f8ceb
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: e4da550f46a079845ba4d8d402efffa1, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: f6056ef95b532754c8f964a781f2d8d5, type: 2}
