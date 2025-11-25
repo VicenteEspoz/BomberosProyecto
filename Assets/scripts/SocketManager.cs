@@ -21,8 +21,7 @@ public class SocketManager : MonoBehaviour
     {
         // 🚨 CRÍTICO: Usa el nombre exacto que tienes en Build Settings (ej: "Scenes/casa")
         { 1, "Scenes/casa" },    // ID 1 en la BD
-        { 2, "Escena_Rescate_Urbano" }, 
-        { 3, "Escena_Fugas_Quimicas" }  
+        { 2, "Scenes/choque" }, 
     };
 
     void Start()
