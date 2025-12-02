@@ -7,14 +7,15 @@ using System;
 public class SocketManager : MonoBehaviour
 {
     // 💡 ESTRUCTURA PARA DESERIALIZAR EL PAYLOAD JSON DEL BACKEND
-    // Debe coincidir con el objeto enviado en Node.js: { idEscenario: X, idSesion: Y }
+    // CORRECCIÓN: Usamos Propiedades { get; set; } para asegurar que el deserializador JSON
+    // pueda escribir los datos. Los campos simples a veces son ignorados.
     [System.Serializable]
     public class ScenarioLoadData
     {
-        public int idEscenario; 
-        // Usamos string aquí porque idSesion podría ser 'null' o un número grande
-        // y lo parsearemos a int? de forma segura.
-        public string idSesion; 
+        public int idEscenario { get; set; } 
+        // CORRECCIÓN FINAL: Cambiado a int? (nullable int).
+        // El JSON trae un número (ej: 10), el deserializador fallaba al intentar meter un número en un string.
+        public int? idSesion { get; set; } 
     }
 
     // COLECCIÓN ESTÁTICA PARA MANTENER ACCIONES EN COLA (Main Thread Dispatcher)
@@ -101,33 +102,45 @@ public class SocketManager : MonoBehaviour
     {
         socket.On("load-scenario", (response) => {
             
+            // 🔍 DEBUG IMPORTANTE: Ver qué llega exactamente antes de intentar leerlo
+            Debug.Log($"📩 RAW JSON recibido del servidor: {response}");
+
             ScenarioLoadData data; // Objeto a deserializar
             string scenarioName = null;
             int scenarioId = 0;
 
             try
             {
-                // 💡 CORRECCIÓN CLAVE: Deserializar el objeto JSON completo
+                // Intentamos deserializar con las propiedades corregidas (int?)
                 data = response.GetValue<ScenarioLoadData>(); 
                 
+                // Si la deserialización falla silenciosamente, data podría no ser null pero tener valores 0
+                if (data == null)
+                {
+                     Debug.LogError("❌ Error: El objeto 'data' es NULL tras deserializar.");
+                     return;
+                }
+
                 scenarioId = data.idEscenario;
 
                 if (scenarioId == 0)
                 {
-                    Debug.LogError("Error: El ID de Escenario recibido es inválido (0).");
+                    Debug.LogError($"Error: El ID de Escenario es 0. Revisar si el JSON RAW coincide con 'idEscenario'.");
                     return;
                 }
                 
                 // 💡 PASO CRÍTICO: Guardar el ID de Sesión en la clase estática
-                if (int.TryParse(data.idSesion, out int receivedSessionId))
+                // Ahora idSesion es del tipo int? (nullable), verificamos si tiene valor directamente
+                if (data.idSesion.HasValue)
                 {
-                    SessionData.CurrentSessionId = receivedSessionId; 
+                    SessionData.CurrentSessionId = data.idSesion.Value; 
                     Debug.Log($"✅ ID de Sesión recibido y guardado en SessionData: {SessionData.CurrentSessionId.Value}");
                 }
                 else
                 {
                     SessionData.CurrentSessionId = null;
-                    Debug.LogWarning("⚠️ No se recibió un ID de Sesión válido o era nulo.");
+                    // Esto no es un error crítico si solo estamos probando escena, pero es warning
+                    Debug.LogWarning($"⚠️ ID de Sesión es nulo en el payload.");
                 }
 
                 // Mapear el ID al nombre de la escena
@@ -156,7 +169,7 @@ public class SocketManager : MonoBehaviour
             }
             catch (System.Exception ex)
             {
-                Debug.LogError($"❌ Error de deserialización o lógico en load-scenario: {ex.Message}. Payload RAW: " + response.ToString());
+                Debug.LogError($"❌ Error de deserialización en load-scenario: {ex.Message}. Payload RAW: {response}");
             }
         });
     }
