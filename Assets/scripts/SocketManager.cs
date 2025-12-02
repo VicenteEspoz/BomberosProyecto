@@ -2,10 +2,21 @@ using SocketIOClient;
 using UnityEngine;
 using UnityEngine.SceneManagement; 
 using System.Collections.Generic; 
-using System; // Necesario para la clase Action
+using System; 
 
 public class SocketManager : MonoBehaviour
 {
+    // 💡 ESTRUCTURA PARA DESERIALIZAR EL PAYLOAD JSON DEL BACKEND
+    // Debe coincidir con el objeto enviado en Node.js: { idEscenario: X, idSesion: Y }
+    [System.Serializable]
+    public class ScenarioLoadData
+    {
+        public int idEscenario; 
+        // Usamos string aquí porque idSesion podría ser 'null' o un número grande
+        // y lo parsearemos a int? de forma segura.
+        public string idSesion; 
+    }
+
     // COLECCIÓN ESTÁTICA PARA MANTENER ACCIONES EN COLA (Main Thread Dispatcher)
     private static readonly List<Action> _executionQueue = new List<Action>();
     private static bool _updateQueued = false; // Flag para saber si hay acciones pendientes
@@ -19,15 +30,14 @@ public class SocketManager : MonoBehaviour
     // Mapeo local de ID de BD a Nombre de Escena de Unity
     private Dictionary<int, string> sceneMap = new Dictionary<int, string>()
     {
-        // 🚨 CRÍTICO: Usa el nombre exacto que tienes en Build Settings (ej: "Scenes/casa")
-        { 1, "Scenes/casa" },    // ID 1 en la BD
+        // 🚨 CRÍTICO: Usa el nombre exacto que tienes en Build Settings
+        { 1, "Scenes/casa" }, 
         { 2, "Scenes/choque" }, 
+        // Añade más aquí según tu BD
     };
 
     void Start()
     {
-        // ... (Tu lógica de Start existente) ...
-        
         // 1. Configuración de la conexión
         var uri = new System.Uri("http://pacheco.chillan.ubiobio.cl:8020/"); 
         socket = new SocketIOUnity(uri);
@@ -35,7 +45,13 @@ public class SocketManager : MonoBehaviour
         // Evento de conexión
         socket.OnConnected += (sender, e) => {
             Debug.Log("✅ Conectado al Backend. ID de Socket: " + socket.Id);
+            // Registrar esta estación VR para que el backend sepa dónde enviar el comando
             socket.Emit("register-unity", vrStationId); 
+        };
+        
+        // Manejo de errores de conexión (importante para depuración)
+        socket.OnError += (sender, e) => {
+            Debug.LogError($"❌ Error de Socket: {e}");
         };
         
         // 2. Activar la escucha del comando de escena inmediatamente
@@ -51,10 +67,8 @@ public class SocketManager : MonoBehaviour
         // Solo ejecutamos si hay acciones pendientes
         if (_executionQueue.Count > 0)
         {
-            // Bloqueamos la colección para evitar concurrencia
             lock (_executionQueue) 
             {
-                // Copiamos las acciones y limpiamos la cola original
                 var actionsToExecute = new List<Action>(_executionQueue);
                 _executionQueue.Clear();
 
@@ -77,6 +91,7 @@ public class SocketManager : MonoBehaviour
             return;
         }
 
+        // Notificar al backend que esta instancia VR está lista para recibir un escenario
         socket.Emit("unity-ready", vrStationId); 
         Debug.Log($"📡 Evento 'unity-ready' enviado con ID: {vrStationId}");
     }
@@ -86,39 +101,52 @@ public class SocketManager : MonoBehaviour
     {
         socket.On("load-scenario", (response) => {
             
-            int scenarioId = 0;
+            ScenarioLoadData data; // Objeto a deserializar
             string scenarioName = null;
+            int scenarioId = 0;
 
             try
             {
-                scenarioId = response.GetValue<int>(); 
+                // 💡 CORRECCIÓN CLAVE: Deserializar el objeto JSON completo
+                data = response.GetValue<ScenarioLoadData>(); 
+                
+                scenarioId = data.idEscenario;
 
                 if (scenarioId == 0)
                 {
-                    Debug.LogError("Error: El ID de Escenario recibido es inválido (0). Payload RAW: " + response.ToString());
+                    Debug.LogError("Error: El ID de Escenario recibido es inválido (0).");
                     return;
+                }
+                
+                // 💡 PASO CRÍTICO: Guardar el ID de Sesión en la clase estática
+                if (int.TryParse(data.idSesion, out int receivedSessionId))
+                {
+                    SessionData.CurrentSessionId = receivedSessionId; 
+                    Debug.Log($"✅ ID de Sesión recibido y guardado en SessionData: {SessionData.CurrentSessionId.Value}");
+                }
+                else
+                {
+                    SessionData.CurrentSessionId = null;
+                    Debug.LogWarning("⚠️ No se recibió un ID de Sesión válido o era nulo.");
                 }
 
                 // Mapear el ID al nombre de la escena
                 if (sceneMap.TryGetValue(scenarioId, out scenarioName))
                 {
                     Debug.Log($"🚨 Comando recibido: Cargar ID {scenarioId} -> Escena '{scenarioName}'.");
-
-                    // 🚨 LA SOLUCIÓN: En lugar de llamar LoadScene directamente,
-                    // la añadimos a la cola para ser ejecutada en el Hilo Principal (Main Thread)
                     
-                    string sceneToLoad = scenarioName; // Capturamos el nombre de la escena
+                    // Se añade a la cola para ser ejecutada en el Hilo Principal
+                    string sceneToLoad = scenarioName; 
                     
                     lock (_executionQueue)
                     {
                         _executionQueue.Add(() => {
-                             // Esto se ejecutará en el método Update() del hilo principal
+                             // Esto se ejecuta en el Main Thread y carga la nueva escena
                              SceneManager.LoadScene(sceneToLoad); 
                              Debug.Log($"✅ Escena '{sceneToLoad}' cargada con éxito en el Main Thread.");
                         });
                         _updateQueued = true;
                     }
-
                 }
                 else
                 {
@@ -128,7 +156,7 @@ public class SocketManager : MonoBehaviour
             }
             catch (System.Exception ex)
             {
-                Debug.LogError($"❌ Error de conversión en load-scenario: {ex.Message}.");
+                Debug.LogError($"❌ Error de deserialización o lógico en load-scenario: {ex.Message}. Payload RAW: " + response.ToString());
             }
         });
     }
