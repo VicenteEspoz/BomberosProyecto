@@ -11,19 +11,31 @@ public class CamionBombero : MonoBehaviour
 
     [Header("Configuración de Salida")]
     public Transform rightDoor;      // Arrastra aquí el objeto de la puerta derecha
-    public Transform cameraRig;      // El objeto padre del jugador (Camera Rig/XRRig)
+    public Transform cameraRig;      // El objeto padre del jugador (PlayerController o Camera Rig)
     public Transform disembarkPoint; // Un Empty GameObject fuera del camión a donde irá el jugador
+    
+    [Header("Configuración de Movimiento")]
+    public GameObject smoothControls; // ARRASTRA AQUÍ TU OBJETO "SmoothControls"
     
     [Header("Ajustes de Animación")]
     public float doorOpenSpeed = 2f; // Qué tan rápido abre la puerta
-    public Vector3 doorOpenAngle = new Vector3(0, 90, 0); // Ángulo de apertura (ajusta el eje Y si es necesario)
+    public Vector3 doorOpenAngle = new Vector3(0, 90, 0); // Ángulo de apertura
     public float disembarkSpeed = 3f; // Velocidad a la que sale el jugador
 
-    private bool hasArrived = false; // Para asegurarnos que la secuencia solo pase una vez
+    private bool hasArrived = false; 
+
+    void Start()
+    {
+        // Al iniciar el juego, apagamos el movimiento para que no camines dentro del camión
+        if (smoothControls != null)
+        {
+            smoothControls.SetActive(false);
+        }
+    }
 
     void Update()
     {
-        // Si no hay destinos o ya llegamos y terminamos la secuencia, no hacemos nada en Update
+        // Si no hay destinos o ya llegamos, no hacemos nada
         if (targets.Count == 0 || hasArrived) return;
 
         MoveTruck();
@@ -73,26 +85,35 @@ public class CamionBombero : MonoBehaviour
         while (time < 1)
         {
             time += Time.deltaTime * doorOpenSpeed;
-            // Usamos Slerp para una rotación suave
             rightDoor.localRotation = Quaternion.Slerp(initialRotation, targetRotation, time);
-            yield return null; // Esperar al siguiente frame
+            yield return null; 
         }
 
         // 3. Esperar un momento con la puerta abierta
         yield return new WaitForSeconds(0.2f);
 
         // 4. Mover la Camera Rig hacia afuera
-        // IMPORTANTE: Desemparentar el Rig para que ya no sea hijo del camión
         if (cameraRig != null && disembarkPoint != null)
         {
-            cameraRig.parent = null; // Ahora es independiente en la escena
+            cameraRig.parent = null; // Desemparentar para que sea independiente
 
+            // Movemos al jugador hasta el punto de bajada
             while (Vector3.Distance(cameraRig.position, disembarkPoint.position) > 0.05f)
             {
-                // Movemos el Rig hacia el punto de salida
                 cameraRig.position = Vector3.MoveTowards(cameraRig.position, disembarkPoint.position, disembarkSpeed * Time.deltaTime);
                 yield return null;
             }
+        }
+
+        // 5. ACTIVAR MOVIMIENTO DEL JUGADOR
+        if (smoothControls != null)
+        {
+            smoothControls.SetActive(true);
+            Debug.Log("Jugador ha bajado. Movimiento activado.");
+        }
+        else
+        {
+            Debug.LogWarning("No asignaste 'SmoothControls' en el inspector del camión.");
         }
 
         Debug.Log("Secuencia de llegada completada.");
