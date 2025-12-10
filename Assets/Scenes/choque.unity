@@ -5633,6 +5633,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 7438632088983809487, guid: 91fcaf841e125f04695a2221ac5cc6e6, type: 3}
+    - target: {fileID: -2924736283237254239, guid: 6e56a0a7d4aa4de4483c05dfe019ce0a, type: 3}
+      propertyPath: m_Name
+      value: subarus
+      objectReference: {fileID: 0}
     - target: {fileID: -2915837094382469283, guid: 6e56a0a7d4aa4de4483c05dfe019ce0a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
