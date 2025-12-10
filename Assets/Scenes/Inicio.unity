@@ -4240,6 +4240,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vrStationId: VR-STATION-01
+  screenFader: {fileID: 1490822551}
 --- !u!1 &1063907142
 GameObject:
   m_ObjectHideFlags: 0
@@ -4891,6 +4892,7 @@ GameObject:
   - component: {fileID: 1490822548}
   - component: {fileID: 1490822550}
   - component: {fileID: 1490822549}
+  - component: {fileID: 1490822551}
   m_Layer: 0
   m_Name: CenterEyeAnchor
   m_TagString: MainCamera
@@ -4972,6 +4974,21 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1490822547}
   m_Enabled: 1
+--- !u!114 &1490822551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1490822547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fc0042068776d14baafd5918631f2fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeTime: 0.5
+  fadeColor: {r: 0, g: 0, b: 0, a: 1}
+  startFadedOut: 0
 --- !u!1 &1591576203
 GameObject:
   m_ObjectHideFlags: 0

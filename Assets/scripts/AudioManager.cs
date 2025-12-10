@@ -40,16 +40,19 @@ public class AudioManager : MonoBehaviour
     // Método público llamado por el botón (a través de EndSimulationButtonController)
     public void EndSimulationAndQuit()
     {
-        Debug.Log("🚨 Comando de cierre recibido. Deteniendo grabación y subiendo resultados.");
+        Debug.Log("🚨 Comando de cierre recibido. Procesando...");
         
-        // 2. Detener y subir el audio. Usamos StartCoroutine para la subida asíncrona.
         if (isRecording)
         {
+            // Iniciamos la subida. La app se cerrará DENTRO de esta corrutina cuando termine.
             StartCoroutine(StopAndUploadAudio());
         }
-        
-        // 3. CERRAR LA APLICACIÓN
-        StartCoroutine(QuitAfterDelay(4.0f)); 
+        else
+        {
+            // Si no estaba grabando, cerramos inmediatamente
+            Debug.Log("No se estaba grabando. Cerrando app...");
+            Application.Quit();
+        }
     }
 
     private void StartRecording()
@@ -78,8 +81,6 @@ public class AudioManager : MonoBehaviour
 
     IEnumerator StopAndUploadAudio()
     {
-        if (!isRecording) yield break;
-
         // Detener micrófono
         int position = Microphone.GetPosition(micName);
         Microphone.End(micName);
@@ -87,38 +88,46 @@ public class AudioManager : MonoBehaviour
 
         Debug.Log("🎙️ Grabación detenida. Procesando audio...");
 
+        // Verificación de seguridad
         if (!SessionData.CurrentSessionId.HasValue)
         {
-            Debug.LogError("❌ No hay SessionData.CurrentSessionId. No se puede subir el audio.");
+            Debug.LogError("❌ Error: No hay ID de sesión. Cerrando...");
+            Application.Quit(); // Cerramos si hay error
             yield break;
         }
 
-        // Convertir AudioClip a WAV (bytes)
+        // --- PROCESAMIENTO (Esto puede tardar un poco) ---
+        // Sugerencia: Aquí podrías activar un texto en el Canvas que diga "SUBIENDO DATOS, ESPERE..."
+        yield return null; // Esperamos un frame para que la UI se actualice si pusiste un mensaje
+
         byte[] wavData = WavUtility.FromAudioClip(recording, position);
 
-        // Preparar el formulario Multipart
         List<IMultipartFormSection> formData = new List<IMultipartFormSection>();
         formData.Add(new MultipartFormFileSection("audio", wavData, "grabacion_final.wav", "audio/wav"));
 
-        // Construir URL: /api/v1/sesiones/:id/audio
         string url = $"{BASE_URL}/{SessionData.CurrentSessionId.Value}/audio";
 
         using (UnityWebRequest www = UnityWebRequest.Post(url, formData))
         {
-            www.method = "PUT"; // Cambiamos el método a PUT manualmente
-            Debug.Log($"📤 Subiendo audio a: {url}");
+            www.method = "PUT";
+            Debug.Log($"📤 Subiendo audio ({wavData.Length / 1024 / 1024} MB)... Por favor espere.");
             
+            // --- ESPERAMOS AQUI HASTA QUE TERMINE LA SUBIDA ---
             yield return www.SendWebRequest();
 
             if (www.result != UnityWebRequest.Result.Success)
             {
-                Debug.LogError($"❌ Error al subir audio: {www.error} - {www.downloadHandler.text}");
+                Debug.LogError($"❌ Error al subir audio: {www.error}");
             }
             else
             {
-                Debug.Log("✅ Audio subido correctamente al servidor.");
+                Debug.Log("✅ Audio subido exitosamente.");
             }
         }
+
+        // --- 3. AHORA SÍ CERRAMOS LA APP ---
+        Debug.Log("👋 Proceso terminado. Cerrando aplicación.");
+        Application.Quit();
     }
 }
 
