@@ -49,7 +49,7 @@ public class AudioManager : MonoBehaviour
         }
         
         // 3. CERRAR LA APLICACIÓN
-        StartCoroutine(QuitAfterDelay(1.0f)); 
+        StartCoroutine(QuitAfterDelay(4.0f)); 
     }
 
     private void StartRecording()
