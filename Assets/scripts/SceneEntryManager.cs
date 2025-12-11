@@ -22,7 +22,7 @@ public class SceneEntryManager : MonoBehaviour
         // Mientras tanto, la pantalla sigue negra gracias al "Start Faded Out".
         yield return new WaitForEndOfFrame(); 
         yield return new WaitForEndOfFrame(); 
-        yield return new WaitForSeconds(0.5f); // Opcional: espera medio segundo extra por si acaso.
+        yield return new WaitForSeconds(1.2f); // Opcional: espera medio segundo extra por si acaso.
 
         // 2. AHORA SÍ, FADE IN
         // El lag ya pasó, ahora mostramos la escena suavemente.
