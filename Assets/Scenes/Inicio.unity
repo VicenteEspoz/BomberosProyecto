@@ -5194,6 +5194,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vrStationId: VR-STATION-01
+  feedbackText: {fileID: 1119335187}
   screenFader: {fileID: 1490822551}
 --- !u!1 &962400796
 GameObject:

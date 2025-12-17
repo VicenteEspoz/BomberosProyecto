@@ -1,6 +1,7 @@
 using SocketIOClient;
 using UnityEngine;
 using UnityEngine.SceneManagement; 
+using TMPro;
 using System.Collections.Generic; 
 using System; 
 using System.Collections; // Necesario para IEnumerator
@@ -20,6 +21,10 @@ public class SocketManager : MonoBehaviour
     private SocketIOUnity socket;
     
     public string vrStationId = "VR-STATION-01"; 
+
+    [Header("Referencias de UI")] // Organiza el inspector
+    [Tooltip("Arrastra aquí el texto TMP que mostrará el mensaje")]
+    public TMP_Text feedbackText; // <--- NUEVO: Referencia al texto en el Canvas
 
     // Referencia opcional a un Fader (si tienes OVRScreenFade o uno propio)
     // Si usas el SDK de Meta, busca el script OVRScreenFade en tu cámara.
@@ -77,6 +82,11 @@ public class SocketManager : MonoBehaviour
         // Notificar al backend que esta instancia VR está lista para recibir un escenario
         socket.Emit("unity-ready", vrStationId); 
         Debug.Log($"📡 Evento 'unity-ready' enviado con ID: {vrStationId}");
+        if (feedbackText != null) 
+        {
+            feedbackText.text = "Esperando instrucciones del instructor...";
+            feedbackText.color = Color.yellow; // Opcional: Cambiar color a amarillo (aviso)
+        }
     }
     
     // --- LÓGICA DE RECEPCIÓN (THREAD DE RED) ---
@@ -100,6 +110,7 @@ public class SocketManager : MonoBehaviour
                 {
                     _executionQueue.Add(() => {
                         // Iniciamos el proceso asíncrono
+                        if (feedbackText != null) feedbackText.text = "Cargando escenario...";
                         StartCoroutine(LoadSceneAsyncRoutine(scenarioName));
                     });
                     _updateQueued = true;
